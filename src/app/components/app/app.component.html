@@ -1,3 +1,27 @@
-
-
 <h1>TODO</h1>
+
+<p>{{ items.length }} <span
+        *ngIf="items.length === 1; else elseBlock">item</span>
+  <ng-template #elseBlock>items</ng-template>
+</p>
+
+<p>Filters:
+  <button type="button" (click)="filter = 'all'">All</button>
+  <button type="button" (click)="filter = 'active'">Active</button>
+  <button type="button" (click)="filter = 'done'">Done</button>
+</p>
+
+<ol>
+  <li *ngFor="let item of items">
+    <app-item [item]="item" (onRemove)="remove(item)"></app-item>
+  </li>
+</ol>
+
+<div>
+  <input type="text" #newItem
+         (keyup.enter)="add(newItem.value); newItem.value = ''"
+         placeholder="Add item">
+  <button type="button" (click)="add(newItem.value); newItem.value = ''">
+    Добавить
+  </button>
+</div>

@@ -1,0 +1,15 @@
+<div>
+  <input type="checkbox" [checked]="item.isDone" (change)="item.isDone = !item.isDone">
+
+  <span *ngIf="!editable">
+    <span>{{ item.description }}</span>
+    <button type="button" (click)="editable = !editable">Edit</button>
+    <button type="button" (click)="onRemove.emit()">Remove</button>
+  </span>
+
+  <span *ngIf="editable">
+    <input type="text" [value]="item.description" #editedItem>
+    <button type="button" (click)="editable = !editable">Cancel</button>
+    <button type="button" (click)="save(editedItem.value)">Save</button>
+  </span>
+</div>
